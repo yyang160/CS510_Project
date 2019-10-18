@@ -16,7 +16,7 @@ class Searcher:
         ranker = metapy.index.OkapiBM25()
         q = metapy.index.Document()
         q.content(query)
-        top_docs = ranker.score(self.idx, q, num_results = 10)
+        top_docs = ranker.score(self.idx, q, num_results = 50)
 
         for d_id, score in top_docs:
             print(d_id, score)

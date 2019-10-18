@@ -5,4 +5,4 @@
 - [ ] Collect relevance judgements {Q, D, R = 0 or 1} either through clicks or through explicit relevance marking.
 
 ## Notes
-Need to download datasets folder and docs.json from [here](https://drive.google.com/drive/folders/1Tgzaj9-qBZgXYwd1UugjYENJd8yzfc0x?usp=sharing) and to run the searcher. 
+Need to download datasets folder and docs.json from [here](https://drive.google.com/drive/folders/1Tgzaj9-qBZgXYwd1UugjYENJd8yzfc0x?usp=sharing) to run the searcher. 

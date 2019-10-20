@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <title>CS510 Search Engine</title>
+</head>
+<p>Paper search</p>
+
+<div class="wrap">
+    <!--<form action="" method="post" novalidate>-->
+   <div class="search">
+           <form action="" method="post" novalidate style="width:100%; display:flex;">
+               {{ form.hidden_tag() }}
+       {{ form.query(class_="searchTerm") }}{{ form.submit(class_="searchButton") }}
+           </form>
+   </div>
+    <!--</form>-->
+</div>
+
+<!--<form action="" method="post" novalidate>-->
+    <!--{{ form.hidden_tag() }}-->
+    <!--<p>-->
+        <!--{{ form.query.label }}<br>-->
+        <!--{{ form.query(size=32) }}-->
+    <!--</p>-->
+    <!--<p>{{ form.submit() }}</p>-->
+<!--</form>-->
+
+<div class="searchResultsContainer">
+ {% for item in results %}
+    <div><hr>
+        <p style="font-size:20px; color:DarkBlue">{{ item.title}} </p></div>
+        <table><tr><td> {{item.abstract}} + "</td></tr></table>
+ {% endfor %}
+</div>
+<body>
+
+</body>
+</html>

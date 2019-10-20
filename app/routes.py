@@ -15,18 +15,11 @@ class SearchForm(FlaskForm):
 @app.route('/', methods =['GET', 'POST'])
 def index():
     form = SearchForm()
-    print(form.data)
-    print(form.validate_on_submit())
     if form.validate_on_submit():
-        flash('Login requested for user  remember_me=')
-        return redirect('/search/{}'.format((form.query.data)))
+        print(form.data)
+        searcher = Searcher.Searcher()
+        result = searcher.search(form.data['query'])
+        form = SearchForm()
+        return render_template('template.html',results=result, form = form)
     return  render_template('template.html',results=[], form = SearchForm())
-
-@app.route("/search/<query>", methods=['GET', 'POST'])
-def search(query):
-    searcher = Searcher.Searcher()
-    print(query)
-    result = searcher.search(query)
-    form = SearchForm()
-    form.query.default = query
-    return render_template('template.html',results=result, form = form)
+#

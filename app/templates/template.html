@@ -18,19 +18,14 @@
     <!--</form>-->
 </div>
 
-<!--<form action="" method="post" novalidate>-->
-    <!--{{ form.hidden_tag() }}-->
-    <!--<p>-->
-        <!--{{ form.query.label }}<br>-->
-        <!--{{ form.query(size=32) }}-->
-    <!--</p>-->
-    <!--<p>{{ form.submit() }}</p>-->
-<!--</form>-->
+
 
 <div class="searchResultsContainer">
  {% for item in results %}
     <div><hr>
-        <p style="font-size:20px; color:DarkBlue">{{ item.title}} </p></div>
+        <p style="font-size:20px; color:DarkBlue"> <a target="_blank" href="{{item.url}}">{{ item.title}}</a> </p></div>
+      <input type="radio" id="relevant" name="relevance{{item.title}}"  value="1" checked> <label for="relevant">Relevent</label>
+    <input type="radio" id="irrelevant" name="relevance{{item.title}}" value="0" > <label for="irrelevant">Irrelevent</label>
         <table><tr><td> {{item.abstract}} + "</td></tr></table>
  {% endfor %}
 </div>
@@ -38,3 +33,6 @@
 
 </body>
 </html>
+
+
+<p><input type=\"radio\" id=\"rel\" name=\"" + resultData[0] + "\" value=\"rel_" + resultData[i].title + "_" + rank +"\"> <label for=\"relevant\"><font color=\"green\">Relevant</font></label>";

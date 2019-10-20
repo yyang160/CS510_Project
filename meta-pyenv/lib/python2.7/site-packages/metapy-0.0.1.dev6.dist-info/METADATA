@@ -1,0 +1,30 @@
+Metadata-Version: 2.0
+Name: metapy
+Version: 0.0.1.dev6
+Summary: Python bindings for MeTA
+Home-page: https://github.com/meta-toolkit/metapy
+Author: Chase Geigle
+Author-email: geigle1@illinois.edu
+License: MIT
+Keywords: NLP,natural language processing,IR,information retrieval,CL,computational lingusitics,parsing,tagging,tokenizing,syntax,lingustics,natural language,text mining,text analysis
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: License :: OSI Approved :: University of Illinois/NCSA Open Source License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Text Processing
+Classifier: Topic :: Text Processing :: Filters
+Classifier: Topic :: Text Processing :: General
+Classifier: Topic :: Text Processing :: Indexing
+Classifier: Topic :: Text Processing :: Linguistic
+
+UNKNOWN
+
+

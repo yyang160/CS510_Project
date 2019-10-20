@@ -28,24 +28,21 @@ class Searcher:
             data = json.load(fp)
 
         results = []
-        print("start indexing")
         q = metapy.index.Document()
         q.content(query)
-        print("find top docs")
-        ret = []
-        for i in range(50):
-            title = randomString(10)
-            abstract = randomString(100)
-            url = 'www.google.com'
-            ret.append({'title':title, 'url':url, 'abstract':abstract})
-        return ret
-        # top_docs = self.ranker.score(self.idx, q)
-        # print("output")
-        # for d_id, score in top_docs:
-        #     print(d_id, score)
-        #     if str(d_id) in data:
-        #         results.append(data[str(d_id)])
-        # return results
+        # for i in range(50):
+        #     title = randomString(10)
+        #     abstract = randomString(100)
+        #     url = 'www.google.com'
+        #     ret.append({'title':title, 'url':url, 'abstract':abstract})
+        # return ret
+        top_docs = self.ranker.score(self.idx, q)
+        for d_id, score in top_docs:
+            print(d_id, score)
+            if str(d_id) in data:
+                results.append(data[str(d_id)])
+        print(results)
+        return results
 
 if __name__ == "__main__":
     s = Searcher()

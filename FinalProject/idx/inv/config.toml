@@ -1,0 +1,9 @@
+index = "idx"
+corpus = "line.toml"
+stop-words = "lemur-stopwords.txt"
+dataset = "songsdata"
+prefix = "."
+[[analyzers]]
+	filter = "default-unigram-chain"
+	ngram = 1
+	method = "ngram-word"

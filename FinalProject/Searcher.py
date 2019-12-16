@@ -2,6 +2,15 @@ import metapy
 import math
 import json
 import csv
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+def get_score(query):
+    # nltk.download('vader_lexicon')
+
+    sid = SentimentIntensityAnalyzer()
+    comp = sid.polarity_scores(query)
+    return comp['compound']
 
 
 class BM25Plus(metapy.index.RankingFunction): # Refer to paper for formula and explanation
@@ -35,8 +44,24 @@ class Searcher:
 
         songsdata = songsdata.readlines()
         recommend = []
+        percentage = {'Sentiment':'Level', 'positive': 0, 'neutral': 0, 'negative': 0}
+
+        query_sent = get_score(query)
+        new_top_docs = []
 
         for sid, score in top_docs:
+            song = songsdata[sid].split('\t')
+            if query_sent < 0:
+                if song[2] == 'negative':
+                    print(score)
+                    score *= 1.1
+            elif query_sent > 0:
+                if song[2] == 'positive':
+                    score *= 1.1
+            new_top_docs.append([sid, score])
+        new_top_docs.sort(key = lambda x : x[1], reverse = True)
+
+        for sid, score in new_top_docs[:30]:
             d = {}
             song = songsdata[sid].split('\t')
 
@@ -54,7 +79,10 @@ class Searcher:
                 recommend.append(self.getRecommend(artist, song, sentiment))
 
             results.append(d)
-        return [results, recommend]
+            if song[2] == 'positive' or song[2] == 'negative' or song[2] == 'neutral':
+                percentage[song[2]] += 1
+
+        return [results, recommend, percentage]
 
     def getRecommend(self, artist, song_name, sentiment):
         songsdata = open('songsdata/songsdata.txt', 'r')

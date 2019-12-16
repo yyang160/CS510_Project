@@ -45,18 +45,14 @@
    </div>
 </div>
 
-
-
 <section id="property-listing">
     <header class="section-header text-center">
         {% if results|length > 0 %}
         <div class="container">
-                <h2 class="pull-left">We find {{results|length}} songs for you</h2>
+                <h2 class="pull-left">We found {{results|length}} songs for you</h2>
             </div>
         {%endif%}
         </header>
-
-
         <div class="container section-layout">
             {% for item in results %}
                 <div class="layout-item-wrap col-xs-12">
@@ -74,14 +70,15 @@
                             </div>
                         </div>
                     </article>
+                </div>
          {% endfor %}
-
         </div>
 </section>
 
+
 <footer id="footer">
     <div class="site-footer-bottom">
-        <div class="container"><p class="copyright pull-left wow slideInRight">CS510 Final Project.<a target="_blank" href="github.com"">Github link</a></p>
+        <div class="container"><p class="copyright pull-left wow slideInRight">CS510 Final Project.<a target="_blank" href="github.com">Github link</a></p>
         </div>
     </div>
 </footer>

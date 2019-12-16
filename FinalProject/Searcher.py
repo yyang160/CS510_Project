@@ -31,7 +31,7 @@ class Searcher:
         q = metapy.index.Document()
         q.content(query)
 
-        top_docs = ranker.score(self.idx, q, num_results=100)
+        top_docs = ranker.score(self.idx, q, num_results=30)
 
         songsdata = songsdata.readlines()
         recommend = []
@@ -43,9 +43,8 @@ class Searcher:
             d['artist'] = song[0]
             d['song'] = song[1]
             d['sentiment'] = song[2]
-            d['link'] = song[3]
+            d['link'] = 'http://www.lyricsfreak.com' + song[3]
             d['text'] = song[4].replace('@', '\n')
-            results.append(d)
 
             # Compute recommended songs
             if len(recommend) < 8:
@@ -54,32 +53,48 @@ class Searcher:
                 sentiment = song[2]
                 recommend.append(self.getRecommend(artist, song, sentiment))
 
-        return results, recommend
+            results.append(d)
+        return [results, recommend]
 
     def getRecommend(self, artist, song_name, sentiment):
+        songsdata = open('songsdata/songsdata.txt', 'r')
+        songsdata = songsdata.readlines()
+
         with open('songsdata/singer_scores.json') as json_file:
             scores = json.load(json_file)
+        with open('songsdata/singer_scores_sid.json') as json_file:
+            sids = json.load(json_file)
         songs = scores[artist]
+        singer_sids = sids[artist]
         idx = 0
         for i, song in enumerate(songs):
             score, name = song
             if name == song_name:
                 idx = i
                 break
+        song_data = {}
         if sentiment == 'positive' or sentiment == 'neutral':
             if idx + 1 < len(songs):
-                return songs[idx+1][1]
+                # return songs[idx+1][1]
+                sid = singer_sids[idx+1][1]
             elif len(songs) >= 2:
-                return songs[idx-1][1]
+                sid = singer_sids[idx-1][1]
             else:
-                return None
+                sid = None
         else:
             if idx - 1 >= 0:
-                return songs[idx-1][1]
+                sid = singer_sids[idx-1][1]
             elif len(songs) >= 2:
-                return songs[idx+1][1]
+                sid = singer_sids[idx+1][1]
             else:
-                return None
+                sid = None
+
+        if sid:
+            song = songsdata[sid].split('\t')
+            return {'artist': song[0], 'song': song[1], 'sentiment': song[2],
+                    'link': 'http://www.lyricsfreak.com' + song[3],
+                    'text': song[4].replace('@', '\n')}
+        return None
 
 #
 # s = Searcher()

@@ -51,14 +51,43 @@
     <header class="section-header text-center">
         {% if results|length > 0 %}
         <div class="container">
-                <h2 class="pull-left">We find {{results|length}} songs for you</h2>
+                <h2 class="pull-left">We found {{results[0]|length}} songs for you</h2>
             </div>
         {%endif%}
         </header>
 
 
         <div class="container section-layout">
-            {% for item in results %}
+            {% for item in results[0] %}
+                <div class="layout-item-wrap col-xs-12">
+                    <article class="property layout-item clearfix list-style">
+                        <div class="property-contents clearfix">
+                            <header class="property-header clearfix">
+                                <div class="pull-left">
+                                    <h6 class="entry-title"><a href="{{item.link}}">{{item.song}}</a></h6>
+                                    <span class="property-location"><i class="fa fa-user"></i> {{item.artist}}</span>
+                                </div>
+                                <div class="pull-right"> <span class="property-sentiment"><i class="fa fa-smile-o"></i> {{item.sentiment}}</span></div>
+                            </header>
+                            <div class="contents clearfix">
+                                <p>{{item.text}} </p>
+                            </div>
+                        </div>
+                    </article>
+         {% endfor %}
+
+        </div>
+        <section id="recommend-listing">
+        <header class="section-header text-center">
+        {% if results|length > 0 %}
+        <div class="container">
+                <h2 class="pull-left">Based on your search, we recommend: </h2>
+            </div>
+        {%endif%}
+        </header>
+
+        <div class="container section-layout">
+            {% for item in results[1] %}
                 <div class="layout-item-wrap col-xs-12">
                     <article class="property layout-item clearfix list-style">
                         <div class="property-contents clearfix">
@@ -78,6 +107,9 @@
 
         </div>
 </section>
+</section>
+
+
 
 <footer id="footer">
     <div class="site-footer-bottom">
@@ -87,7 +119,7 @@
 </footer>
 <a href="#top" id="scroll-top"><i class="fa fa-angle-up"></i></a>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins)
 <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }} " ></script>
 <script src="{{ url_for('static', filename='assets/js/jquery.migrate.js') }} " ></script>
 <script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }} " ></script>

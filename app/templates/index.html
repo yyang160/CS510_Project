@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>Smart Music Search Engine</title>
+ <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Poppins:400,600" rel="stylesheet">
+
+      <!-- favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" >
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='plugins/font-awesome/css/font-awesome.min.css') }} " rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/slick/slick.css') }} "  rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/slick-nav/slicknav.css') }}"  rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/plugins/wow/animate.css') }} "  rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/assets/css/bootstrap.css') }} "  rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/theme.css') }} "  rel="stylesheet">
+</head>
+
+<body class="listing-template">
+<header id="site-header">
+    <div id="site-header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="clearfix">
+                        <p class="timing-in-header">Smart Music Search Engine</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="site-banner" class="text-center clearfix">
+   <div class="container" style="display: flex;flex-direction: column; ">
+       <form action="" class="form-inline" method="post" novalidate >
+               {{ form.hidden_tag() }}
+            {{ form.query(class_="form-control form-control-sm mr-3 w-75") }}
+               <button class="fa fa-search" type="submit" aria-hidden="true"></button>
+       </form>
+
+   </div>
+</div>
+
+
+
+<section id="property-listing">
+    <header class="section-header text-center">
+        {% if results|length > 0 %}
+        <div class="container">
+                <h2 class="pull-left">We find {{results|length}} songs for you</h2>
+            </div>
+        {%endif%}
+        </header>
+
+
+        <div class="container section-layout">
+            {% for item in results %}
+                <div class="layout-item-wrap col-xs-12">
+                    <article class="property layout-item clearfix list-style">
+                        <div class="property-contents clearfix">
+                            <header class="property-header clearfix">
+                                <div class="pull-left">
+                                    <h6 class="entry-title"><a href="{{item.link}}">{{item.song}}</a></h6>
+                                    <span class="property-location"><i class="fa fa-user"></i> {{item.artist}}</span>
+                                </div>
+                                <div class="pull-right"> <span class="property-sentiment"><i class="fa fa-smile-o"></i> {{item.sentiment}}</span></div>
+                            </header>
+                            <div class="contents clearfix">
+                                <p>{{item.text}} </p>
+                            </div>
+                        </div>
+                    </article>
+         {% endfor %}
+
+        </div>
+</section>
+
+<footer id="footer">
+    <div class="site-footer-bottom">
+        <div class="container"><p class="copyright pull-left wow slideInRight">CS510 Final Project.<a target="_blank" href="github.com"">Github link</a></p>
+        </div>
+    </div>
+</footer>
+<a href="#top" id="scroll-top"><i class="fa fa-angle-up"></i></a>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }} " ></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.migrate.js') }} " ></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }} " ></script>
+<script src="{{ url_for('static', filename='plugins/slick-nav/jquery.slicknav.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/slick/slick.min.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/jquery-ui/jquery-ui.min.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/tweetie/tweetie.js') }} ') }} "></script>
+<script src="{{ url_for('static', filename='plugins/forms/jquery.form.min.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/forms/jquery.validate.min.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/modernizr/modernizr.custom.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/wow/wow.min.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/zoom/zoom.js') }} "></script>
+<script src="{{ url_for('static', filename='plugins/mixitup/mixitup.min.js') }} "></script>
+<!---<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyD2MtZynhsvwI2B40juK6SifR_OSyj4aBA&libraries=places"></script>--->
+<script src="plugins/whats-nearby/source/WhatsNearby.js"></script>
+<script src="{{ url_for('static', filename='assets/js/theme.js') }} "></script>
+</body>
+</html>

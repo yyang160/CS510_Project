@@ -30,6 +30,7 @@ class Searcher:
         ranker = BM25Plus(k1 = 1.2, b = 0.75)
         q = metapy.index.Document()
         q.content(query)
+
         top_docs = ranker.score(self.idx, q, num_results=100)
 
         songsdata = songsdata.readlines()
@@ -80,13 +81,13 @@ class Searcher:
             else:
                 return None
 
-
-s = Searcher()
-results, recommend = s.search("rain")
-print(results[0])
-print(results[0]['sentiment'])
-print(recommend)
-
+#
+# s = Searcher()
+# results, recommend = s.search("rain")
+# print(results[0])
+# print(results[0]['sentiment'])
+# print(recommend)
+#
 
 
 

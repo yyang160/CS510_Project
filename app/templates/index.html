@@ -47,6 +47,7 @@
 
 
 <section id="property-listing">
+    {% if results|length > 0 %}
     <header class="section-header text-center">
         {% if results|length > 0 %}
         <div class="container">
@@ -55,7 +56,6 @@
         {%endif%}
     </header>
         <head>
-            {% if results|length > 0 %}
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -81,7 +81,6 @@
         chart.draw(data, options);
       }
     </script>
-    {%endif%}
 </head>
 <body>
     <div style="margin: 10px 0 0 10px;width: 1000px">
@@ -123,6 +122,7 @@
         </header>
 
         <div class="container section-layout">
+            {% if results|length > 0 %}
             {% for item in results[1] %}
                 <div class="layout-item-wrap col-xs-12">
                     <article class="property layout-item clearfix list-style">
@@ -140,9 +140,11 @@
                         </div>
                     </article>
          {% endfor %}
-
+        {%endif%}
         </div>
 </section>
+    {%endif%}
+
 </section>
 
 

@@ -22,8 +22,8 @@ class BM25Plus(metapy.index.RankingFunction): # Refer to paper for formula and e
 
     def score_one(self, sd):        # score of a single term
         return math.log2((sd.num_docs+1)/sd.doc_count)*((self.k1 + 1)
-                                                        * sd.doc_term_count/(self.k1 * ((1-self.b)+self.b * sd.doc_size/sd.avg_dl)
-                                                        + sd.doc_term_count)+1)
+                * sd.doc_term_count/(self.k1 * ((1-self.b)+self.b * sd.doc_size/sd.avg_dl)
+                + sd.doc_term_count)+1)
 
 class Searcher:
 
@@ -53,7 +53,6 @@ class Searcher:
             song = songsdata[sid].split('\t')
             if query_sent < 0:
                 if song[2] == 'negative':
-                    print(score)
                     score *= 1.1
             elif query_sent > 0:
                 if song[2] == 'positive':
@@ -61,13 +60,15 @@ class Searcher:
             new_top_docs.append([sid, score])
         new_top_docs.sort(key = lambda x : x[1], reverse = True)
 
-        for sid, score in new_top_docs[:30]:
+        for sid, score in new_top_docs:
             d = {}
             song = songsdata[sid].split('\t')
 
             d['artist'] = song[0]
             d['song'] = song[1]
             d['sentiment'] = song[2]
+            if d['sentiment'] == 'positive' or d['sentiment'] == 'negative' or d['sentiment'] == 'neutral':
+                percentage[d['sentiment']] += 1
             d['link'] = 'http://www.lyricsfreak.com' + song[3]
             d['text'] = song[4].replace('@', '\n')
 
@@ -79,8 +80,6 @@ class Searcher:
                 recommend.append(self.getRecommend(artist, song, sentiment))
 
             results.append(d)
-            if song[2] == 'positive' or song[2] == 'negative' or song[2] == 'neutral':
-                percentage[song[2]] += 1
 
         return [results, recommend, percentage]
 

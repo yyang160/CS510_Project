@@ -3,7 +3,7 @@ CoffeeScript==1.1.2
 Flask==0.11.1
 Flask-WTF==0.14.2
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 MarkupSafe==0.23
 metapy==0.0.1.dev6
 PyExecJS==1.3.1
